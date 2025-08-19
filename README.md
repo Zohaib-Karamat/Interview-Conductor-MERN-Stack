@@ -11,7 +11,7 @@ A comprehensive, interactive interview preparation platform built with **Next.js
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
 [![Framer Motion](https://img.shields.io/badge/Framer_Motion-12.23.12-pink?style=flat-square&logo=framer)](https://www.framer.com/motion/)
 
-[🚀 Live Demo](interview-conductor-mern-stack.vercel.app)
+[🚀 Live Demo](https://interview-conductor-mern-stack.vercel.app/)
 
 </div>
 
