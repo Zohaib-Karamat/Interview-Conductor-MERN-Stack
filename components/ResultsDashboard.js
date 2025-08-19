@@ -193,7 +193,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
         >
           <button
             onClick={onRestart}
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center mx-auto"
+            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold shadow-lg hover:shadow-xl transition-all flex items-center mx-auto cursor-pointer"
           >
             <FiRefreshCw className="mr-2" />
             Take Interview Again

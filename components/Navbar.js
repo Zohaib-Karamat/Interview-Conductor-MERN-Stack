@@ -21,19 +21,19 @@ export default function Navbar({ onProfileClick, onPracticeClick }) {
           
           <div className="flex items-center space-x-6">
             <nav className="hidden md:flex space-x-6">
-              <button className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">
+              <button className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors cursor-pointer">
                 <FiHome size={16} />
                 <span>Home</span>
               </button>
               <button 
                 onClick={onPracticeClick}
-                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">
+                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors cursor-pointer">
                 <FiBookOpen size={16} />
                 <span>Practice</span>
               </button>
               {/* <button 
                 onClick={onProfileClick}
-                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors"
+                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors cursor-pointer"
               >
                 <FiUser size={16} />
                 <span>Profile</span>

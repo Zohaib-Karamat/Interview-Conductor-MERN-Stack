@@ -17,7 +17,7 @@ export default function Home() {
   const [showProfileModal, setShowProfileModal] = React.useState(false);
 
   const currentQuestion = mernQuestions[currentQuestionIndex];
-  const progress = ((currentQuestionIndex + 1) / mernQuestions.length) * 100;
+  const progress = (currentQuestionIndex / mernQuestions.length) * 100;
 
   const handleAnswerSelect = (answer) => {
     setSelectedAnswers({
@@ -120,7 +120,7 @@ export default function Home() {
           <div className="mt-2">
             <Progressbar progress={progress} />
             <div className="text-center mt-2 text-sm text-gray-600 dark:text-gray-400">
-              {Math.round(progress)}% Complete
+              {currentQuestionIndex === 0 ? '0' : Math.round(progress)}% Complete
             </div>
           </div>
           
@@ -128,7 +128,7 @@ export default function Home() {
             <button
               onClick={handlePrevious}
               disabled={currentQuestionIndex === 0}
-              className="px-6 py-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+              className="px-6 py-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition-all cursor-pointer"
             >
               Previous
             </button>

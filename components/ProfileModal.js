@@ -67,7 +67,7 @@ export default function ProfileModal({ isOpen, onClose }) {
               <h2 className="text-2xl font-bold">Learning Resources</h2>
               <button
                 onClick={onClose}
-                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700"
+                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
               >
                 <FiX size={20} />
               </button>
@@ -96,7 +96,7 @@ export default function ProfileModal({ isOpen, onClose }) {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between p-2 rounded hover:bg-white dark:hover:bg-gray-600 transition-colors group"
+                        className="flex items-center justify-between p-2 rounded hover:bg-white dark:hover:bg-gray-600 transition-colors group cursor-pointer"
                       >
                         <span className="text-sm">{link.title}</span>
                         <FiExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />

@@ -16,7 +16,7 @@ export default function MCQCard({ question, options, onSelect, selectedAnswer })
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             onClick={() => onSelect(key)}
-            className={`w-full p-4 text-left rounded-lg transition-all ${
+            className={`w-full p-4 text-left rounded-lg transition-all cursor-pointer ${
               selectedAnswer === key
                 ? 'bg-blue-500 text-white shadow-md'
                 : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
