@@ -1,23 +1,38 @@
 // components/ThemeToggle.js
 "use client";
 import { useState, useEffect } from "react";
-import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes";
+import { FiMoon, FiSun } from "react-icons/fi";
 
 export default function ThemeToggle() {
-  const { theme, setTheme } = useTheme();
+  const [theme, setTheme] = useState("light");
   const [mounted, setMounted] = useState(false);
 
-  useEffect(() => setMounted(true), []);
+  useEffect(() => {
+    setMounted(true);
+    const savedTheme = localStorage.getItem("theme") || "light";
+    setTheme(savedTheme);
+    document.documentElement.classList.toggle("dark", savedTheme === "dark");
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === "dark" ? "light" : "dark";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    document.documentElement.classList.toggle("dark", newTheme === "dark");
+  };
 
   if (!mounted) return null;
 
   return (
     <button
-      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="p-2 rounded-full bg-black/10 dark:bg-white/10"
+      onClick={toggleTheme}
+      className="p-3 rounded-full bg-white/20 dark:bg-gray-800/20 backdrop-blur-lg border border-gray-200/20 dark:border-gray-700/20 hover:bg-white/30 dark:hover:bg-gray-800/30 transition-all duration-200"
     >
-      {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
+      {theme === "dark" ? (
+        <FiSun size={20} className="text-yellow-500" />
+      ) : (
+        <FiMoon size={20} className="text-gray-700" />
+      )}
     </button>
   );
 }

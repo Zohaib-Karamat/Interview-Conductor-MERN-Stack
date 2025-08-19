@@ -1,24 +1,46 @@
 // components/Navbar.js
+"use client";
 import { motion } from "framer-motion";
-import { FiHome, FiUser, FiSettings, FiBell } from "react-icons/fi";
+import { FiHome, FiCode, FiBookOpen, FiUser } from "react-icons/fi";
 
-export default function Navbar() {
+export default function Navbar({ onProfileClick, onPracticeClick }) {
   return (
     <motion.nav
-      initial={{ y: 50, opacity: 0 }}
+      initial={{ y: -50, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      className="fixed bottom-4 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-lg rounded-full p-2 shadow-lg border border-gray-200/20"
+      className="fixed top-0 left-0 right-0 z-50 bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-gray-200/20 dark:border-gray-700/20"
     >
-      <div className="flex gap-4 px-4">
-        {[FiHome, FiUser, FiSettings, FiBell].map((Icon, i) => (
-          <motion.button
-            key={i}
-            whileTap={{ scale: 0.9 }}
-            className="p-3 rounded-full bg-gradient-to-br from-blue-100 to-purple-100 text-gray-800 dark:from-gray-700 dark:to-gray-800 dark:text-white"
-          >
-            <Icon size={20} />
-          </motion.button>
-        ))}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          <div className="flex items-center space-x-2">
+            <FiCode className="text-2xl text-blue-600" />
+            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              MERN Interview Conductor
+            </h1>
+          </div>
+          
+          <div className="flex items-center space-x-6">
+            <nav className="hidden md:flex space-x-6">
+              <button className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">
+                <FiHome size={16} />
+                <span>Home</span>
+              </button>
+              <button 
+                onClick={onPracticeClick}
+                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors">
+                <FiBookOpen size={16} />
+                <span>Practice</span>
+              </button>
+              {/* <button 
+                onClick={onProfileClick}
+                className="flex items-center space-x-1 text-gray-700 dark:text-gray-300 hover:text-blue-600 transition-colors"
+              >
+                <FiUser size={16} />
+                <span>Profile</span>
+              </button> */}
+            </nav>
+          </div>
+        </div>
       </div>
     </motion.nav>
   );

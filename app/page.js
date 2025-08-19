@@ -1,103 +1,153 @@
+"use client";
+import React from "react";
 import Image from "next/image";
+import Navbar from "../components/Navbar";
+// import ThemeToggle from "../components/Themetoggle";
+import MCQCard from "../components/MCQCard";
+import Progressbar from "../components/Progressbar";
+import Button from "../components/ui/Button";
+import ProfileModal from "../components/ProfileModal";
+import ResultsDashboard from "../components/ResultsDashboard";
+import { mernQuestions } from "../data/questions";
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const [currentQuestionIndex, setCurrentQuestionIndex] = React.useState(0);
+  const [selectedAnswers, setSelectedAnswers] = React.useState({});
+  const [showResults, setShowResults] = React.useState(false);
+  const [showProfileModal, setShowProfileModal] = React.useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+  const currentQuestion = mernQuestions[currentQuestionIndex];
+  const progress = ((currentQuestionIndex + 1) / mernQuestions.length) * 100;
+
+  const handleAnswerSelect = (answer) => {
+    setSelectedAnswers({
+      ...selectedAnswers,
+      [currentQuestion.id]: answer
+    });
+  };
+
+  const handleNext = () => {
+    if (currentQuestionIndex < mernQuestions.length - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
+    } else {
+      setShowResults(true);
+    }
+  };
+
+  const handlePrevious = () => {
+    setCurrentQuestionIndex(Math.max(0, currentQuestionIndex - 1));
+  };
+
+  const calculateCategoryScores = () => {
+    const categories = {};
+    
+    mernQuestions.forEach(question => {
+      if (!categories[question.category]) {
+        categories[question.category] = { correct: 0, total: 0 };
+      }
+      categories[question.category].total++;
+      
+      if (selectedAnswers[question.id] === question.correct) {
+        categories[question.category].correct++;
+      }
+    });
+    
+    return categories;
+  };
+
+  const calculateScore = () => {
+    let correct = 0;
+    mernQuestions.forEach(q => {
+      if (selectedAnswers[q.id] === q.correct) {
+        correct++;
+      }
+    });
+    return correct;
+  };
+
+  const handleRestart = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedAnswers({});
+    setShowResults(false);
+  };
+
+  if (showResults) {
+    const score = calculateScore();
+    const categoryScores = calculateCategoryScores();
+    
+    return (
+      <>
+        <Navbar onProfileClick={() => setShowProfileModal(true)} />
+        <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
+        <ResultsDashboard 
+          score={score}
+          totalQuestions={mernQuestions.length}
+          categoryScores={categoryScores}
+          onRestart={handleRestart}
+        />
+      </>
+    );
+  }
+
+  return (
+    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 dark:from-gray-900 dark:to-gray-800 font-[family-name:var(--font-geist-sans)]">
+      <Navbar onPracticeClick={() => setShowProfileModal(true)} />
+      <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
+      
+      {/* <div className="absolute top-20 right-8">
+        <ThemeToggle />
+      </div> */}
+      
+      <main className="flex flex-col items-center justify-center gap-8 pt-32 pb-16 px-4">
+        <div className="text-center mb-6">
+          <h2 className="text-2xl font-bold mb-2">MERN Stack Interview</h2>
+          <p className="text-gray-600 dark:text-gray-300">
+            Question {currentQuestionIndex + 1} of {mernQuestions.length}
+          </p>
+          <div className="inline-block px-3 py-1 mt-2 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium">
+            {currentQuestion.category}
+          </div>
+        </div>
+        
+        <div className="w-full max-w-2xl flex flex-col gap-6">
+          <MCQCard 
+            question={currentQuestion.question} 
+            options={currentQuestion.options} 
+            onSelect={handleAnswerSelect}
+            selectedAnswer={selectedAnswers[currentQuestion.id]}
+          />
+          
+          <div className="mt-2">
+            <Progressbar progress={progress} />
+            <div className="text-center mt-2 text-sm text-gray-600 dark:text-gray-400">
+              {Math.round(progress)}% Complete
+            </div>
+          </div>
+          
+          <div className="flex justify-between items-center mt-4">
+            <button
+              onClick={handlePrevious}
+              disabled={currentQuestionIndex === 0}
+              className="px-6 py-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition-all"
+            >
+              Previous
+            </button>
+            
+            <div className="text-center">
+              <div className="text-sm text-gray-500 mb-1">
+                {Object.keys(selectedAnswers).length} of {mernQuestions.length} answered
+              </div>
+            </div>
+            
+            <Button 
+              onClick={handleNext}
+              disabled={!selectedAnswers[currentQuestion.id]}
+            >
+              {currentQuestionIndex === mernQuestions.length - 1 ? 'Finish Interview' : 'Next Question'}
+            </Button>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
