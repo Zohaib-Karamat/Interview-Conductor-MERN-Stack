@@ -124,16 +124,16 @@ export default function Home() {
             </div>
           </div>
           
-          <div className="flex justify-between items-center mt-4">
+          <div className="flex flex-col sm:flex-row justify-between items-center mt-4 gap-4">
             <button
               onClick={handlePrevious}
               disabled={currentQuestionIndex === 0}
-              className="px-6 py-3 rounded-full bg-gray-700 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-all cursor-pointer"
+              className="px-4 py-2 sm:px-6 sm:py-3 rounded-full bg-gray-700 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-all cursor-pointer text-sm sm:text-base w-full sm:w-auto order-2 sm:order-1"
             >
               Previous
             </button>
             
-            <div className="text-center">
+            <div className="text-center order-1 sm:order-2">
               <div className="text-sm text-gray-500 mb-1">
                 {Object.keys(selectedAnswers).length} of {mernQuestions.length} answered
               </div>
@@ -142,6 +142,7 @@ export default function Home() {
             <Button 
               onClick={handleNext}
               disabled={!selectedAnswers[currentQuestion.id]}
+              className="w-full sm:w-auto order-3"
             >
               {currentQuestionIndex === mernQuestions.length - 1 ? 'Finish Interview' : 'Next Question'}
             </Button>
