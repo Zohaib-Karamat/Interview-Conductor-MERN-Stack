@@ -19,17 +19,18 @@ export default function Navbar({ onProfileClick, onPracticeClick }) {
       animate={{ y: 0, opacity: 1 }}
       className="fixed top-0 left-0 right-0 z-50 bg-gray-900/90 backdrop-blur-lg border-b border-gray-700/20"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8">
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center space-x-2 cursor-pointer hover:opacity-80 transition-opacity" onClick={handleHomeClick}>
             <FiCode className="text-2xl text-blue-600" />
-            <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              MERN Interview Conductor
+            <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              <span className="hidden sm:inline">MERN Interview Conductor</span>
+              <span className="sm:hidden">MERN Interview</span>
             </h1>
           </div>
           
           <div className="flex items-center space-x-6">
-            <nav className="hidden md:flex space-x-6">
+            <nav className="flex space-x-4 sm:space-x-6">
               <button 
                 onClick={handleHomeClick}
                 className={`flex items-center space-x-1 transition-colors cursor-pointer ${
@@ -41,7 +42,7 @@ export default function Navbar({ onProfileClick, onPracticeClick }) {
                 aria-current={isActive('/') ? 'page' : undefined}
               >
                 <FiHome size={16} />
-                <span>Home</span>
+                <span className="hidden sm:inline">Home</span>
               </button>
               <button 
                 onClick={onPracticeClick}
@@ -51,7 +52,7 @@ export default function Navbar({ onProfileClick, onPracticeClick }) {
                 aria-label="Open practice modal"
               >
                 <FiBookOpen size={16} />
-                <span>Practice</span>
+                <span className="hidden sm:inline">Practice</span>
               </button>
               {/* <button 
                 onClick={onProfileClick}
