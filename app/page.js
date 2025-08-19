@@ -90,7 +90,7 @@ export default function Home() {
   }
 
   return (
-    <div className="relative min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 dark:from-gray-900 dark:to-gray-800 font-[family-name:var(--font-geist-sans)]">
+    <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 font-[family-name:var(--font-geist-sans)]">
       <Navbar onPracticeClick={() => setShowProfileModal(true)} />
       <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
       
@@ -101,10 +101,10 @@ export default function Home() {
       <main className="flex flex-col items-center justify-center gap-8 pt-32 pb-16 px-4">
         <div className="text-center mb-6">
           <h2 className="text-2xl font-bold mb-2">MERN Stack Interview</h2>
-          <p className="text-gray-600 dark:text-gray-300">
+          <p className="text-gray-300">
             Question {currentQuestionIndex + 1} of {mernQuestions.length}
           </p>
-          <div className="inline-block px-3 py-1 mt-2 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 text-sm font-medium">
+          <div className="inline-block px-3 py-1 mt-2 rounded-full bg-blue-900 text-blue-200 text-sm font-medium">
             {currentQuestion.category}
           </div>
         </div>
@@ -119,7 +119,7 @@ export default function Home() {
           
           <div className="mt-2">
             <Progressbar progress={progress} />
-            <div className="text-center mt-2 text-sm text-gray-600 dark:text-gray-400">
+            <div className="text-center mt-2 text-sm text-gray-400">
               {currentQuestionIndex === 0 ? '0' : Math.round(progress)}% Complete
             </div>
           </div>
@@ -128,7 +128,7 @@ export default function Home() {
             <button
               onClick={handlePrevious}
               disabled={currentQuestionIndex === 0}
-              className="px-6 py-3 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-300 dark:hover:bg-gray-600 transition-all cursor-pointer"
+              className="px-6 py-3 rounded-full bg-gray-700 text-gray-300 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-600 transition-all cursor-pointer"
             >
               Previous
             </button>

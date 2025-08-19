@@ -47,7 +47,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
   const motivational = getMotivationalMessage();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-purple-100 dark:from-gray-900 dark:to-gray-800 pt-20 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 pt-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -56,7 +56,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
           className="text-center mb-8"
         >
           <h1 className="text-4xl font-bold mb-2">Interview Results</h1>
-          <p className="text-gray-600 dark:text-gray-300">Your MERN Stack Assessment Summary</p>
+          <p className="text-gray-300">Your MERN Stack Assessment Summary</p>
         </motion.div>
 
         {/* Main Score Card */}
@@ -64,7 +64,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-8 shadow-xl"
+          className="bg-gray-800 rounded-2xl p-8 mb-8 shadow-xl"
         >
           <div className="flex items-center justify-center mb-6">
             <motion.div
@@ -119,7 +119,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
               <span className="text-xl font-semibold">{performance.level}</span>
             </div>
             <h2 className="text-2xl font-bold mb-2">{motivational.title}</h2>
-            <p className="text-gray-600 dark:text-gray-300">{motivational.message}</p>
+            <p className="text-gray-300">{motivational.message}</p>
           </div>
         </motion.div>
 
@@ -136,7 +136,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5 + index * 0.1 }}
-              className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg"
+              className="bg-gray-800 rounded-xl p-6 shadow-lg"
             >
               <h3 className="font-semibold mb-2">{category}</h3>
               <div className="flex items-center justify-between">
@@ -145,7 +145,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
                   {((categoryScore.correct / categoryScore.total) * 100).toFixed(0)}%
                 </span>
               </div>
-              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+              <div className="w-full bg-gray-700 rounded-full h-2 mt-2">
                 <motion.div
                   className="bg-gradient-to-r from-blue-500 to-purple-500 h-2 rounded-full"
                   initial={{ width: 0 }}
@@ -162,7 +162,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-6 mb-8 shadow-lg"
+          className="bg-gray-800 rounded-xl p-6 mb-8 shadow-lg"
         >
           <h3 className="text-xl font-semibold mb-4 flex items-center">
             <FiBook className="mr-2" />
@@ -175,7 +175,7 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ delay: 0.8 + index * 0.1 }}
-                className="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg"
+                className="flex items-center p-3 bg-gray-700 rounded-lg"
               >
                 <div className="w-2 h-2 bg-blue-500 rounded-full mr-3" />
                 <span>{suggestion}</span>

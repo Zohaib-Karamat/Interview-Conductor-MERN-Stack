@@ -60,14 +60,14 @@ export default function ProfileModal({ isOpen, onClose }) {
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-xl p-6 m-4 max-w-4xl w-full max-h-[80vh] overflow-y-auto"
+            className="bg-gray-800 rounded-xl p-6 m-4 max-w-4xl w-full max-h-[80vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-2xl font-bold">Learning Resources</h2>
               <button
                 onClick={onClose}
-                className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 cursor-pointer"
+                className="p-2 rounded-full hover:bg-gray-700 cursor-pointer"
               >
                 <FiX size={20} />
               </button>
@@ -96,7 +96,7 @@ export default function ProfileModal({ isOpen, onClose }) {
                         href={link.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between p-2 rounded hover:bg-white dark:hover:bg-gray-600 transition-colors group cursor-pointer"
+                        className="flex items-center justify-between p-2 rounded hover:bg-gray-600 transition-colors group cursor-pointer"
                       >
                         <span className="text-sm">{link.title}</span>
                         <FiExternalLink size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
