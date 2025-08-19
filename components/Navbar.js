@@ -4,11 +4,16 @@ import { motion } from "framer-motion";
 import { useRouter, usePathname } from "next/navigation";
 import { FiHome, FiCode, FiBookOpen, FiUser } from "react-icons/fi";
 
-export default function Navbar({ onProfileClick, onPracticeClick }) {
+export default function Navbar({ onProfileClick, onPracticeClick, onHomeClick }) {
   const router = useRouter();
   const pathname = usePathname();
+  
   const handleHomeClick = () => {
-    router.push('/');
+    if (onHomeClick) {
+      onHomeClick();
+    } else {
+      router.push('/');
+    }
   };
 
   const isActive = (path) => pathname === path;

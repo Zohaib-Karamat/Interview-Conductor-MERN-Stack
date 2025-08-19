@@ -1,8 +1,18 @@
 // components/ResultsDashboard.js
+"use client";
 import { motion } from "framer-motion";
+import { useRouter, usePathname } from "next/navigation";
 import { FiTrendingUp, FiTrendingDown, FiTarget, FiBook, FiStar, FiRefreshCw } from "react-icons/fi";
+import Navbar from "./Navbar";
 
-export default function ResultsDashboard({ score, totalQuestions, categoryScores, onRestart }) {
+export default function ResultsDashboard({ score, totalQuestions, categoryScores, onRestart, onProfileClick, onPracticeClick }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  
+  const handleHomeClick = () => {
+    router.push('/');
+  };
+
   const percentage = (score / totalQuestions) * 100;
   
   const getPerformanceLevel = () => {
@@ -47,7 +57,13 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
   const motivational = getMotivationalMessage();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 pt-20 px-4">
+    <>
+      <Navbar 
+        onPracticeClick={onPracticeClick}
+        onProfileClick={onProfileClick}
+        onHomeClick={onRestart}
+      />
+      <div className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 pt-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
@@ -201,5 +217,6 @@ export default function ResultsDashboard({ score, totalQuestions, categoryScores
         </motion.div>
       </div>
     </div>
+    </>
   );
 }

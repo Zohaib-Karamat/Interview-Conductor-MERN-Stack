@@ -77,13 +77,14 @@ export default function Home() {
     
     return (
       <>
-        <Navbar onProfileClick={() => setShowProfileModal(true)} />
         <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
         <ResultsDashboard 
           score={score}
           totalQuestions={mernQuestions.length}
           categoryScores={categoryScores}
           onRestart={handleRestart}
+          onProfileClick={() => setShowProfileModal(true)}
+          onPracticeClick={() => setShowProfileModal(true)}
         />
       </>
     );
@@ -91,7 +92,10 @@ export default function Home() {
 
   return (
     <div className="relative min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 font-[family-name:var(--font-geist-sans)]">
-      <Navbar onPracticeClick={() => setShowProfileModal(true)} />
+      <Navbar 
+        onPracticeClick={() => setShowProfileModal(true)} 
+        onProfileClick={() => setShowProfileModal(true)}
+      />
       <ProfileModal isOpen={showProfileModal} onClose={() => setShowProfileModal(false)} />
       
       {/* <div className="absolute top-20 right-8">
